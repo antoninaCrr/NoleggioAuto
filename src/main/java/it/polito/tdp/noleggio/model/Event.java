@@ -2,15 +2,18 @@ package it.polito.tdp.noleggio.model;
 
 import java.time.LocalTime;
 
-public class Event implements Comparable<Event>{
+public class Event implements Comparable<Event>{ // l'oggetto deve essere confrontabile, quindi implementa Comparable
 	
-	public enum EventType {
-		NUOVO_CLIENTE,
+	// contiene le info sull'evento stesso 
+	
+	
+	public enum EventType { // enum = enumerazione, sorta di classi degeneri che definiscono una serie di costanti
+		NUOVO_CLIENTE,      // li uso come valori simbolici distinti
 		AUTO_RESTITUITA
 	}
 	
-	private LocalTime time ;
-	private EventType type ;
+	private LocalTime time ; // LocalTime poichè abbiamo deciso di usare il tempo reale
+	private EventType type ;  // questo è l'oggetto che metteremo nella coda prioritaria
 	
 	
 	public Event(LocalTime time, EventType type) {
@@ -57,8 +60,8 @@ public class Event implements Comparable<Event>{
 		return true;
 	}
 	@Override
-	public int compareTo(Event other) {
-		return this.time.compareTo(other.time);
+	public int compareTo(Event other) { // delego il confronto all'attributo time
+		return this.time.compareTo(other.time); // il criterio di ordinamento è dato dall'attributo time (verranno prima eventi che hanno un tempo inferiore)
 	}
 	
 	
